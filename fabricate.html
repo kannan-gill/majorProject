@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="Template Mo">
+    <link href="https://fonts.googleapis.com/css?family=Poppins:100,200,300,400,500,600,700,800,900" rel="stylesheet">
+
+    <title>Education Template - Meeting Detail Page</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+
+    <!-- Additional CSS Files -->
+    <link rel="stylesheet" href="assets/css/fontawesome.css">
+    <link rel="stylesheet" href="assets/css/templatemo-edu-meeting.css">
+    <link rel="stylesheet" href="assets/css/owl.css">
+    <link rel="stylesheet" href="assets/css/lightbox.css">
+<!--
+
+
+-->
+  </head>
+
+<body>
+      <!-- ***** Header Area Start ***** -->
+  <header class="header-area header-sticky">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <nav class="main-nav">
+                    <!-- ***** Logo Start ***** -->
+                    <a href="index.html" class="logo">
+                        Dip Coating Unit
+                    </a>
+                    <!-- ***** Logo End ***** -->
+                    <!-- ***** Menu Start ***** -->
+                    <ul class="nav">
+                      <li><a href="index.html" class="active">Home</a></li>
+                      <li><a href="about.html">About</a></li>
+                      <li><a href="researchData.html">Research</a></li>
+                      <li><a href="fabricate.html">Fabricate</a></li>
+                      <li><a>Report</a></li> 
+                      <li><a href="contactus.html">Contact Us</a></li> 
+                  </ul>        
+                  <a class='menu-trigger'>
+                      <span>Menu</span>
+                  </a>
+                    <!-- ***** Menu End ***** -->
+                </nav>
+            </div>
+        </div>
+    </div>
+</header>
+<!-- ***** Header Area End ***** -->
+
+
+    
+   </div>
+
+   <section class="contact-us" id="contact">
+    <div class="container mt-5">
+      <div class="row">
+        <div class="col-lg-6 align-self-center">
+          <div class="row">
+            <div class="col-lg-12">
+              <form id="contact" action="" method="post">
+                <div class="row">
+                  <div class="col-lg-12">
+                    <h2>Let's fabricate a Semiconductor chip</h2>
+                  </div>
+                  <div class="col-lg-6">
+                    <h5>Enter Dip Speed</h5>
+                    <fieldset>
+                      <input name="Dip Speed" type="number" id="dipspeed" placeholder="Dip Speed (cm/s)" required="">
+                    </fieldset>
+                  </div>
+                  
+                  <div class="col-lg-6">
+                    <h5>Enter Retract Speed</h5>
+                    <fieldset>
+                      <input name="Retract Speed" type="number" id="retractspeed" placeholder="Retract Speed (cm/s)" required="">
+                    </fieldset>
+                  </div>
+                  <div class="col-lg-6">
+                    <h5>Enter Delay Time</h5>
+                    <fieldset>
+                      <input name="Delay Time" type="number" id="delay" placeholder="Delay Time (s)" required="">
+                    </fieldset>
+                  </div>
+                  <div class="col-lg-6">
+                    <h5>Enter Number of Cycles</h5>
+                    <fieldset>
+                      <input name="Number of Cycles" type="number" id="cycles" placeholder="Number of Cycles" required="">
+                    </fieldset>
+                  </div>
+                  <div class="col-lg-12">
+                    <fieldset>
+                      <button name="enter" type="submit" id="form-submit" class="button">Fabricate</button>
+                    </fieldset>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+
+
+        </div>
+
+        <div class="col-lg-6 align-self-center">
+            <img class="m-3 projectimage" src="./assets/images/semiconductor.jpg" alt="not found"/>
+        </div>
+        
+      </div>
+    </div>
+
+  </section>
+
+
+
+
+
+  <!-- Scripts -->
+  <!-- Bootstrap core JavaScript -->
+    <script src="vendor/jquery/jquery.min.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+    <script src="assets/js/isotope.min.js"></script>
+    <script src="assets/js/owl-carousel.js"></script>
+    <script src="assets/js/lightbox.js"></script>
+    <script src="assets/js/tabs.js"></script>
+    <script src="assets/js/video.js"></script>
+    <script src="assets/js/slick-slider.js"></script>
+    <script src="assets/js/custom.js"></script>
+    <script>
+        $.ajaxSetup({timeout:1000});
+        // btn = document.querySelector('input[name="butname"]');
+        var data1 = document.getElementById("dipspeed");
+        var data2 = document.getElementById("retractspeed");
+        var data3 = document.getElementById("delay");
+        var data4 = document.getElementById("cycles");
+        var btn = document.getElementById("form-submit");
+        // txt = document.querySelector('p');
+        // btn.addEventListener('click', led1);
+        btn.addEventListener('click', sendData);
+        
+        function sendData()
+        {
+        
+            var dipspeed = data1.value;
+            var retractspeed = data2.value;
+            var delay = data3.value;
+            var cycles = data4.value;
+
+
+            const xhr3 = new XMLHttpRequest();
+    
+            xhr3.open('post',"http://localhost:8080/experiment/"+dipspeed+"/"+retractspeed+"/"+delay+"/"+cycles);
+            xhr3.send();
+
+
+
+         //   const xhr4 = new XMLHttpRequest();
+
+         //   const arduinoIP = "10.0.0.0";
+
+         //   xhr4.open('get',"http://"+ arduinoIP+"/?dipSpeed="+dipspeed+"&retractSpeed="+retractspeed+"&delay="+delay+"&cycles="+cycles);
+         //   xhr4.send();
+
+
+        }
+        </script>
+    <script>
+        //according to loftblog tut
+        $('.nav li:first').addClass('active');
+
+        var showSection = function showSection(section, isAnimate) {
+          var
+          direction = section.replace(/#/, ''),
+          reqSection = $('.section').filter('[data-section="' + direction + '"]'),
+          reqSectionPos = reqSection.offset().top - 0;
+
+          if (isAnimate) {
+            $('body, html').animate({
+              scrollTop: reqSectionPos },
+            800);
+          } else {
+            $('body, html').scrollTop(reqSectionPos);
+          }
+
+        };
+
+        var checkSection = function checkSection() {
+          $('.section').each(function () {
+            var
+            $this = $(this),
+            topEdge = $this.offset().top - 80,
+            bottomEdge = topEdge + $this.height(),
+            wScroll = $(window).scrollTop();
+            if (topEdge < wScroll && bottomEdge > wScroll) {
+              var
+              currentId = $this.data('section'),
+              reqLink = $('a').filter('[href*=\\#' + currentId + ']');
+              reqLink.closest('li').addClass('active').
+              siblings().removeClass('active');
+            }
+          });
+        };
+
+        $('.main-menu, .responsive-menu, .scroll-to-section').on('click', 'a', function (e) {
+          e.preventDefault();
+          showSection($(this).attr('href'), true);
+        });
+
+        $(window).scroll(function () {
+          checkSection();
+        });
+    </script>
+</body>
+
+
+  </body>
+
+</html>

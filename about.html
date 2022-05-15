@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="Template Mo">
+    <link href="https://fonts.googleapis.com/css?family=Poppins:100,200,300,400,500,600,700,800,900" rel="stylesheet">
+
+    <title>Education Template - Meeting Detail Page</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+
+    <!-- Additional CSS Files -->
+    <link rel="stylesheet" href="assets/css/fontawesome.css">
+    <link rel="stylesheet" href="assets/css/templatemo-edu-meeting.css">
+    <link rel="stylesheet" href="assets/css/owl.css">
+    <link rel="stylesheet" href="assets/css/lightbox.css">
+<!--
+
+TemplateMo 569 Edu Meeting
+
+https://templatemo.com/tm-569-edu-meeting
+
+-->
+  </head>
+
+<body>
+      <!-- ***** Header Area Start ***** -->
+  <header class="header-area header-sticky">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <nav class="main-nav">
+                    <!-- ***** Logo Start ***** -->
+                    <a href="index.html" class="logo">
+                        Dip Coating Unit
+                    </a>
+                    <!-- ***** Logo End ***** -->
+                    <!-- ***** Menu Start ***** -->
+                    <ul class="nav">
+                      <li><a href="index.html" class="active">Home</a></li>
+                      <li><a href="about.html">About</a></li>
+                      <li><a href="researchData.html">Research</a></li>
+                      <li><a href="fabricate.html">Fabricate</a></li>
+                      <li><a>Report</a></li> 
+                      <li><a href="contactus.html">Contact Us</a></li> 
+                  </ul>        
+                  <a class='menu-trigger'>
+                      <span>Menu</span>
+                  </a>
+                    <!-- ***** Menu End ***** -->
+                </nav>
+            </div>
+        </div>
+    </div>
+</header>
+<!-- ***** Header Area End ***** -->
+
+
+    <section class="aboutproject">
+        <div class="container d-flex justify-content-center align-items-center">
+            <div class="inside-container w-50">
+              <!-- <div class="" -->
+                <h2 class="w-100 m-2 self-align-center">ABOUT</h2>
+
+                <p class="w-75 my-2 mx-auto">
+                  Dip Coater Unit aims to make a production ready dip coating unit with various
+                  user given parameters in order to influence the thickness of coating on the
+                  substrate. <br/>
+                  These user-given parameters include speed control of the motor (ie the distance to be covered by the rod) 
+                  and a delay for which we expect the motor to wait for coating
+                  to occur. <br/>
+                  We have tried to implement best user interface by adding lcd screen, matrix keyboard,
+                  web application for remote access, and pre-defined speed settings in our project.
+                  Since we want to implement this project in the new semiconductor fabrication
+                  laboratory of PEC, we want to use metallic or ceramic apparatus which can be
+                  used in a clean room. <br/>
+                  A lot of effort has been paid to reduce vibrations and make the device portable.
+                  The unit can be run over Wifi via the website and the experiment logs are also maintained for future results.
+                  Thus, being a cheap alternative to market available dip coating units, our model is best suited for college laboratories
+                  and small industries to conduct fabrication and research.
+                </p>
+
+            </div>
+            <div class="row w-50 m-1">
+              <!-- <div class="row h-25 m-2 bg-white">
+                hi
+              </div>
+              <div class="row h-25 m-2 bg-white">
+                hi
+              </div> -->
+              
+                <div class="col-md-6 my-2">
+                  <img class="aboutImage" src="../templatemo_569_edu_meeting/assets/images/semiconductor.jpg"/>
+                </div>
+                <div class="col-md-6 my-2">
+                  <img class="aboutImage" src="../templatemo_569_edu_meeting/assets/images/semiconductor.jpg"/>
+                </div>
+                <div class="col-md-6 my-2">
+                  <img class="aboutImage" src="../templatemo_569_edu_meeting/assets/images/semiconductor.jpg"/>
+                </div>
+                <div class="col-md-6 my-2">
+                  <img class="aboutImage" src="../templatemo_569_edu_meeting/assets/images/semiconductor.jpg"/>
+                </div>
+              
+              
+              
+              
+
+            </div>
+        </div>
+    </section>
+   </div>
+
+
+
+
+  <!-- Scripts -->
+  <!-- Bootstrap core JavaScript -->
+    <script src="vendor/jquery/jquery.min.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+    <script src="assets/js/isotope.min.js"></script>
+    <script src="assets/js/owl-carousel.js"></script>
+    <script src="assets/js/lightbox.js"></script>
+    <script src="assets/js/tabs.js"></script>
+    <script src="assets/js/video.js"></script>
+    <script src="assets/js/slick-slider.js"></script>
+    <script src="assets/js/custom.js"></script>
+    <script>
+        //according to loftblog tut
+        $('.nav li:first').addClass('active');
+
+        var showSection = function showSection(section, isAnimate) {
+          var
+          direction = section.replace(/#/, ''),
+          reqSection = $('.section').filter('[data-section="' + direction + '"]'),
+          reqSectionPos = reqSection.offset().top - 0;
+
+          if (isAnimate) {
+            $('body, html').animate({
+              scrollTop: reqSectionPos },
+            800);
+          } else {
+            $('body, html').scrollTop(reqSectionPos);
+          }
+
+        };
+
+        var checkSection = function checkSection() {
+          $('.section').each(function () {
+            var
+            $this = $(this),
+            topEdge = $this.offset().top - 80,
+            bottomEdge = topEdge + $this.height(),
+            wScroll = $(window).scrollTop();
+            if (topEdge < wScroll && bottomEdge > wScroll) {
+              var
+              currentId = $this.data('section'),
+              reqLink = $('a').filter('[href*=\\#' + currentId + ']');
+              reqLink.closest('li').addClass('active').
+              siblings().removeClass('active');
+            }
+          });
+        };
+
+        $('.main-menu, .responsive-menu, .scroll-to-section').on('click', 'a', function (e) {
+          e.preventDefault();
+          showSection($(this).attr('href'), true);
+        });
+
+        $(window).scroll(function () {
+          checkSection();
+        });
+    </script>
+</body>
+
+
+  </body>
+
+</html>

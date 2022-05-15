@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+
+    <script src="vendor/jquery/jquery.min.js"></script>
+    <script>
+        
+      const xhr = new XMLHttpRequest();
+      xhr.onload = function(data){
+        console.log("a");
+        console.log(JSON.parse(data.currentTarget.response)[0]["sno"]);
+        console.log(data.currentTarget.response);
+        var responseData = JSON.parse(data.currentTarget.response);
+
+        responseData.sort((a,b)=>a.sno - b.sno);
+
+        var tablebody = document.getElementById("tableBody");
+        
+        responseData.forEach(dataitem=>{
+          tablebody.innerHTML+=("<tr><td>"+ dataitem["sno"]+"</td><td>"+ dataitem["datetime"]+"</td><td>"+dataitem["dipspeed"]+"</td><td>"+ dataitem["retractspeed"]+"</td><td>"+ dataitem["numberofcycles"]+"</td><td>"+ dataitem["delaytime"]+"</td><td>"+ dataitem["temperature"]+"</td><td>"+dataitem["moisure"]+"</td><td>"+dataitem["vibrations"]+"</td><td>"+ dataitem["thickness"]+"</td></tr>")
+        })
+
+      }
+
+      xhr.open('get',"http://localhost:8080/");
+      xhr.send();
+
+    </script>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="Template Mo">
+    <link href="https://fonts.googleapis.com/css?family=Poppins:100,200,300,400,500,600,700,800,900" rel="stylesheet">
+
+    <title>Education Template - Meeting Detail Page</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+
+    <!-- Additional CSS Files -->
+    <link rel="stylesheet" href="assets/css/fontawesome.css">
+    <link rel="stylesheet" href="assets/css/templatemo-edu-meeting.css">
+    <link rel="stylesheet" href="assets/css/owl.css">
+    <link rel="stylesheet" href="assets/css/lightbox.css">
+
+  </head>
+
+<body>
+      <!-- ***** Header Area Start ***** -->
+  <header class="header-area header-sticky">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <nav class="main-nav">
+                    <!-- ***** Logo Start ***** -->
+                    <a href="index.html" class="logo">
+                        Dip Coating Unit
+                    </a>
+                    <!-- ***** Logo End ***** -->
+                    <!-- ***** Menu Start ***** -->
+                    <ul class="nav">
+                      <li><a href="index.html" class="active">Home</a></li>
+                      <li><a href="about.html">About</a></li>
+                      <li><a href="researchData.html">Research</a></li>
+                      <li><a href="fabricate.html">Fabricate</a></li>
+                      <li><a>Report</a></li> 
+                      <li><a href="contactus.html">Contact Us</a></li> 
+                  </ul>        
+                  <a class='menu-trigger'>
+                      <span>Menu</span>
+                  </a>
+                    <!-- ***** Menu End ***** -->
+                </nav>
+            </div>
+        </div>
+    </div>
+</header>
+<!-- ***** Header Area End ***** -->
+
+    
+<section style="overflow: auto;" class="research" id="contact">
+  <div class="mt-5 w-100">
+    <div class="row g-0">
+      <div class="col-lg-3 align-self-center my-2">
+        <div class="row">
+          <div class="col-lg-12">
+            <form id="contact" action="" method="post">
+              <div class="row">
+                <div class="col-lg-12">
+                  <h2>Enter the thickness of conducted Experiment</h2>
+                </div>
+                <div class="col-lg-12">
+                  <h5>Experiment Serial Number</h5>
+                  <fieldset>
+                    <input name="serialnumber" type="number" id="snum" placeholder="Serial Number" required="">
+                  </fieldset>
+                </div>
+                <div class="col-lg-12">
+                  <h5>Observed Thickness</h5>
+                  <fieldset>
+                    <input name="thickness" type="number" id="thickness" placeholder="Thickness" required="">
+                  </fieldset>
+                </div>
+              
+                <div class="col-lg-12">
+                  <fieldset>
+                    <button type="submit" id="thickness-submit" class="button">Submit</button>
+                  </fieldset>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div style="border-radius:1% ;border-color:black;border-width:2px" class="col-lg-9 my-2">
+        <table class="table table-condensed table-striped border border-secondary rounded  bg-info my-2">
+          <thead>
+            <th>S.no</th>
+            <th>DateTime</th>
+            <th>Dip Speed</th>
+            <th>Retract Speed</th>
+            <th>Cycles</th>
+            <th>Delay</th>
+            <th>Temperature</th>
+            <th>Moisture</th>
+            <th>Vibrations</th>
+            <th>Thickness</th>
+          </thead>
+          <tbody id="tableBody">
+            
+    
+          </tbody>
+        </table>
+      </div>
+      
+    </div>
+  </div>
+
+</section>
+
+
+    
+  
+
+    <script>
+      var btn = document.getElementById("thickness-submit");
+
+      btn.addEventListener("click",function(){
+        //event.preventDefault();
+        var data1 = document.querySelector('input[name="serialnumber"]').value;
+        var data2 = document.querySelector('input[name="thickness"]').value;
+
+         const xhr2 = new XMLHttpRequest();
+
+        var params = "serialnumber="+data1+"&thicknessValue="+data2;
+        console.log(params);
+
+     xhr2.open('post',"http://localhost:8080/thickness/"+data1+"/"+data2);
+      xhr2.send(); 
+      })
+
+    </script>
+
+
+
+  <!-- Scripts -->
+  <!-- Bootstrap core JavaScript -->
+
+    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+    <script src="assets/js/isotope.min.js"></script>
+    <script src="assets/js/owl-carousel.js"></script>
+    <script src="assets/js/lightbox.js"></script>
+    <script src="assets/js/tabs.js"></script>
+    <script src="assets/js/video.js"></script>
+    <script src="assets/js/slick-slider.js"></script>
+    <script src="assets/js/custom.js"></script>
+
+  
+
+    <script>
+        //according to loftblog tut
+        $('.nav li:first').addClass('active');
+
+        var showSection = function showSection(section, isAnimate) {
+          var
+          direction = section.replace(/#/, ''),
+          reqSection = $('.section').filter('[data-section="' + direction + '"]'),
+          reqSectionPos = reqSection.offset().top - 0;
+
+          if (isAnimate) {
+            $('body, html').animate({
+              scrollTop: reqSectionPos },
+            800);
+          } else {
+            $('body, html').scrollTop(reqSectionPos);
+          }
+
+        };
+
+        var checkSection = function checkSection() {
+          $('.section').each(function () {
+            var
+            $this = $(this),
+            topEdge = $this.offset().top - 80,
+            bottomEdge = topEdge + $this.height(),
+            wScroll = $(window).scrollTop();
+            if (topEdge < wScroll && bottomEdge > wScroll) {
+              var
+              currentId = $this.data('section'),
+              reqLink = $('a').filter('[href*=\\#' + currentId + ']');
+              reqLink.closest('li').addClass('active').
+              siblings().removeClass('active');
+            }
+          });
+        };
+
+        $('.main-menu, .responsive-menu, .scroll-to-section').on('click', 'a', function (e) {
+          e.preventDefault();
+          showSection($(this).attr('href'), true);
+        });
+
+        $(window).scroll(function () {
+          checkSection();
+        });
+    </script>
+</body>
+
+
+  </body>
+
+</html>
