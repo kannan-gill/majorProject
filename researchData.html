@@ -8,17 +8,16 @@
         
       const xhr = new XMLHttpRequest();
       xhr.onload = function(data){
-        console.log("a");
-        console.log(JSON.parse(data.currentTarget.response)[0]["sno"]);
+        console.log(JSON.parse(data.currentTarget.response)[0]["serialnumber"]);
         console.log(data.currentTarget.response);
         var responseData = JSON.parse(data.currentTarget.response);
 
-        responseData.sort((a,b)=>a.sno - b.sno);
+        responseData.sort((a,b)=>a.serialnumber - b.serialnumber);
 
         var tablebody = document.getElementById("tableBody");
         
         responseData.forEach(dataitem=>{
-          tablebody.innerHTML+=("<tr><td>"+ dataitem["sno"]+"</td><td>"+ dataitem["datetime"]+"</td><td>"+dataitem["dipspeed"]+"</td><td>"+ dataitem["retractspeed"]+"</td><td>"+ dataitem["numberofcycles"]+"</td><td>"+ dataitem["delaytime"]+"</td><td>"+ dataitem["temperature"]+"</td><td>"+dataitem["moisure"]+"</td><td>"+dataitem["vibrations"]+"</td><td>"+ dataitem["thickness"]+"</td></tr>")
+          tablebody.innerHTML+=("<tr><td>"+ dataitem["serialnumber"]+"</td><td>"+ dataitem["datetime"]+"</td><td>"+dataitem["dipspeed"]+"</td><td>"+ dataitem["retractspeed"]+"</td><td>"+dataitem["distance"]+"</td><td>"+ dataitem["numberofcycles"]+"</td><td>"+ dataitem["delaytime"]+"</td><td>"+ dataitem["temperature"]+"</td><td>"+dataitem["humidity"]+"</td><td>"+dataitem["vibration"]+"</td><td>"+ dataitem["thickness"]+"</td></tr>")
         })
 
       }
@@ -125,10 +124,11 @@
             <th>DateTime</th>
             <th>Dip Speed</th>
             <th>Retract Speed</th>
+            <th>Distance</th>
             <th>Cycles</th>
             <th>Delay</th>
             <th>Temperature</th>
-            <th>Moisture</th>
+            <th>Humidity</th>
             <th>Vibrations</th>
             <th>Thickness</th>
           </thead>
@@ -156,14 +156,33 @@
         var data1 = document.querySelector('input[name="serialnumber"]').value;
         var data2 = document.querySelector('input[name="thickness"]').value;
 
-         const xhr2 = new XMLHttpRequest();
+    //     const xhr2 = new XMLHttpRequest();
 
-        var params = "serialnumber="+data1+"&thicknessValue="+data2;
-        console.log(params);
+    //    var params = "serialnumber="+data1+"&thicknessValue="+data2;
+    //    console.log(params);
 
-     xhr2.open('post',"http://localhost:8080/thickness/"+data1+"/"+data2);
-      xhr2.send(); 
-      })
+   //  xhr2.open('post',"http://localhost:8080/thickness/"+data1+"/"+data2);
+    //  xhr2.send(); 
+
+    const json2 = {
+      serialnumber: data1,
+      thickness: data2,
+    };
+  
+  // request options
+  const options = {
+      method: 'POST',
+      body: JSON.stringify(json2),
+      headers: {
+          'Content-Type': 'application/json'
+      }
+  }
+  
+  // send post request
+  fetch('http://localhost:8080/thickness',options)
+      .then(res => console.log(res))
+      .catch(err => console.error(err));    
+      });
 
     </script>
 

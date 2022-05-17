@@ -87,6 +87,12 @@
                     </fieldset>
                   </div>
                   <div class="col-lg-6">
+                    <h5>Enter Vertical Distance</h5>
+                    <fieldset>
+                      <input name="Vertical Speed" type="number" id="verticalspeed" placeholder="Vertical Speed (cm/s)" required="">
+                    </fieldset>
+                  </div>
+                  <div class="col-lg-6">
                     <h5>Enter Delay Time</h5>
                     <fieldset>
                       <input name="Delay Time" type="number" id="delay" placeholder="Delay Time (s)" required="">
@@ -143,24 +149,52 @@
         var data2 = document.getElementById("retractspeed");
         var data3 = document.getElementById("delay");
         var data4 = document.getElementById("cycles");
+        var data5 = document.getElementById("verticalspeed");
         var btn = document.getElementById("form-submit");
         // txt = document.querySelector('p');
         // btn.addEventListener('click', led1);
         btn.addEventListener('click', sendData);
         
         function sendData()
-        {
+        { 
         
-            var dipspeed = data1.value;
-            var retractspeed = data2.value;
-            var delay = data3.value;
-            var cycles = data4.value;
+       //     var dipspeed = data1.value;
+         //   var retractspeed = data2.value;
+           // var delay = data3.value;
+            //var cycles = data4.value;
+            //var distance = data5.value;
 
 
-            const xhr3 = new XMLHttpRequest();
+            const json = {
+              dipspeed: data1.value,
+              retractspeed: data2.value,
+              delay: data3.value,
+              cycles:data4.value,
+              distance:data5.value
+            };
+          
+          // request options
+          const options = {
+              method: 'POST',
+              body: JSON.stringify(json),
+              headers: {
+                  'Content-Type': 'application/json'
+              }
+          }
+          
+          // send post request
+          fetch('http://localhost:8080/experiment',options)
+              .then(res => console.log(res))
+              .catch(err => console.error(err));
+
+
+           // const xhr3 = new XMLHttpRequest();
+
+
+            
     
-            xhr3.open('post',"http://localhost:8080/experiment/"+dipspeed+"/"+retractspeed+"/"+delay+"/"+cycles);
-            xhr3.send();
+           // xhr3.open('post',"http://localhost:8080/experiment/"+dipspeed+"/"+retractspeed+"/"+delay+"/"+cycles+"/"+distance);
+           // xhr3.send();
 
 
 
