@@ -65,7 +65,7 @@
                       <li><a href="about.html">About</a></li>
                       <li><a href="researchData.html">Research</a></li>
                       <li><a href="fabricate.html">Fabricate</a></li>
-                      <li><a>Report</a></li> 
+                      <li><a href="assets/Final Major Report .pdf">Report</a></li> 
                       <li><a href="contactus.html">Contact Us</a></li> 
                   </ul>        
                   <a class='menu-trigger'>
@@ -152,17 +152,8 @@
       var btn = document.getElementById("thickness-submit");
 
       btn.addEventListener("click",function(){
-        //event.preventDefault();
         var data1 = document.querySelector('input[name="serialnumber"]').value;
         var data2 = document.querySelector('input[name="thickness"]').value;
-
-    //     const xhr2 = new XMLHttpRequest();
-
-    //    var params = "serialnumber="+data1+"&thicknessValue="+data2;
-    //    console.log(params);
-
-   //  xhr2.open('post',"http://localhost:8080/thickness/"+data1+"/"+data2);
-    //  xhr2.send(); 
 
     const json2 = {
       serialnumber: data1,

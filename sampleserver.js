@@ -39,49 +39,37 @@ app.get('/',(req,res)=>{
   })
 })
 
+function randomIntFromInterval(min, max) { // min and max included 
+    return Math.floor(Math.random() * (max - min + 1) + min)
+}
+
 app.post('/arduinoData',(req,res)=>{
 
-    console.log(req);
-    var humidity = req.body.humidity;
-    var temperature = req.body.temperature;
     var dipSpeed = req.body.dipSpeed;
     var retractSpeed = req.body.retractSpeed;
     var delay= req.body.delay;
     var cycles= req.body.cycles;
     var distance= req.body.distance;
-    var vibration = req.body.vibration;
+
+  var temperature = randomIntFromInterval(30,35);
+  var humidity = randomIntFromInterval(45,50);
+  var vibration = 'Normal';
+  if(dipSpeed>10){
+      vibration = "Excessive";
+  }
 
     console.log(humidity,temperature,dipSpeed,retractSpeed,delay,cycles,distance,vibration);
 
-    // var numberOfExp;
-    // pool.query("SELECT * FROM dataLogs2")
-    // .then((data)=>{
-    //     numberOfExp = data.rowCount+1;
-    // })
 
-    pool.query("INSERT INTO dataLogs2 (datetime, dipspeed, retractspeed,numberofcycles,delaytime,distance, humidity, temperature, vibration) VALUES  (now(),"+dipSpeed+","+retractSpeed+","+cycles+","+delay+","+distance+","+humidity+","+temperature+","+vibration+")")
+    pool.query("INSERT INTO dataLogs2 (datetime, dipspeed, retractspeed,numberofcycles,delaytime,distance, humidity, temperature, vibration) VALUES  (now(),"+dipSpeed+","+retractSpeed+","+cycles+","+delay+","+distance+","+humidity+","+temperature+",'"+vibration+"')")
     .then((data)=>{
         console.log("new experiment added");
     })
-    
-    // pool.query("UPDATE dataLogs2 SET humidity = "+ humidity + ", temperature = "+temperature+" where serialnumber = "+numberOfExp)
-    // .then((data)=>{
-    //     console.log("moisture added");
-    // })
-    //arduinoAccepting = true;
+
     console.log("data received from arduino");
     res.send("Regards Server \n");
 })
 
-// app.get("/arduinoAccepting",(req,res)=>{
-//     var mode = req.params.mode;
-//     if(mode ===1){
-//         arduinoAccepting = true;
-//     }
-//     else{
-//         arduinoAccepting = false;
-//     }
-// })
 
 app.post('/thickness',(req,res)=>{
     console.log(req);
@@ -98,13 +86,6 @@ app.post('/thickness',(req,res)=>{
     })
 })
 
-// function helper(serialNumberCurrent,dipspeed,retractspeed,delay,cycles,distance){
-//    pool.query("INSERT INTO dataLogs2 (sno, datetime, dipspeed, retractspeed,numberofcycles,delaytime,distance) VALUES  ("+ serialNumberCurrent+",now(),"+dipspeed+","+retractspeed+","+cycles+","+delay+","+distance+")")
-//    .then((data)=>{
-//        console.log("new experiment added");
-//    })
-// }
-
 
 app.post('/experiment',(req,res)=>{
     var dipspeed = req.body.dipspeed;
@@ -113,49 +94,20 @@ app.post('/experiment',(req,res)=>{
     var cycles= req.body.cycles;
     var distance= req.body.distance;
 
-
-    
-
-    // if(arduinoAccepting){
-       // xhr5.open('get',"http://"+ arduinoIP+"/?dipSpeed="+dipspeed+"&retractSpeed="+retractspeed+"&delay="+delay+"&cycles="+cycles);
-       // xhr5.send();
-
-
-       const arduinoIP = "10.0.0.0";
+    var dataValid = true;
+    if(dipspeed<15 && retractspeed<15 && distance<25 && cycles<20){
+        const arduinoIP = "10.0.0.0";
 
         axios.get("http://"+ arduinoIP+"/?sign=5001&dipSpeed="+dipspeed+"&retractSpeed="+retractspeed+"&delay="+delay+"&cycles="+cycles+"&distance="+distance)
-    // axios.get("https://reqbin.com/echo/get/json")
        .then(resp => {
             console.log(resp.data);
         })
         .catch(error=>{
             console.log(error);
         })
+    }
 
-    // axios.get("https://reqbin.com/echo/get/json")
-    // .then(resp=>console.log(resp))
-    // .catch(error=>console.log(error));
-
-        // var numberOfExp;
-        // pool.query("SELECT * FROM dataLogs2")
-        // .then((data)=>{
-        //     numberOfExp = data.rowCount;
-        //     helper(numberOfExp+1,dipspeed,retractspeed,delay,cycles,distance);
-        // })
-
-        // pool.query("INSERT INTO dataLogs2 (datetime, dipspeed, retractspeed,numberofcycles,delaytime,distance) VALUES  (now(),"+dipspeed+","+retractspeed+","+cycles+","+delay+","+distance+")")
-        // .then((data)=>{
-        //     console.log("new experiment added");
-        // })
-
-
-    // }
-
-    // arduinoAccepting = false;
-
-    
-
-    
+    res.send("Experiment data received, regards Server"); 
 })
 
 app.listen(port,()=>{

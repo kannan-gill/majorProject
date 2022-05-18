@@ -44,7 +44,7 @@
                       <li><a href="about.html">About</a></li>
                       <li><a href="researchData.html">Research</a></li>
                       <li><a href="fabricate.html">Fabricate</a></li>
-                      <li><a>Report</a></li> 
+                      <li><a href="assets/Final Major Report .pdf">Report</a></li> 
                       <li><a href="contactus.html">Contact Us</a></li> 
                   </ul>        
                   <a class='menu-trigger'>
@@ -76,37 +76,37 @@
                   <div class="col-lg-6">
                     <h5>Enter Dip Speed</h5>
                     <fieldset>
-                      <input name="Dip Speed" type="number" id="dipspeed" placeholder="Dip Speed (cm/s)" required="">
+                      <input name="Dip Speed" min=1 max=15 type="number" id="dipspeed" placeholder="Dip Speed (cm/s)" required="">
                     </fieldset>
                   </div>
                   
                   <div class="col-lg-6">
                     <h5>Enter Retract Speed</h5>
                     <fieldset>
-                      <input name="Retract Speed" type="number" id="retractspeed" placeholder="Retract Speed (cm/s)" required="">
+                      <input name="Retract Speed" min=1 max=15 type="number" id="retractspeed" placeholder="Retract Speed (cm/s)" required=""/>
                     </fieldset>
                   </div>
                   <div class="col-lg-6">
                     <h5>Enter Vertical Distance</h5>
                     <fieldset>
-                      <input name="Vertical Speed" type="number" id="verticalspeed" placeholder="Vertical Speed (cm/s)" required="">
+                      <input name="Vertical Distance" max=25 min=1 type="number" id="verticalspeed" placeholder="Vertical Distance (cm)" required=""/>
                     </fieldset>
                   </div>
                   <div class="col-lg-6">
                     <h5>Enter Delay Time</h5>
                     <fieldset>
-                      <input name="Delay Time" type="number" id="delay" placeholder="Delay Time (s)" required="">
+                      <input name="Delay Time" min=1 type="number" id="delay" placeholder="Delay Time (s)" required=""/>
                     </fieldset>
                   </div>
                   <div class="col-lg-6">
                     <h5>Enter Number of Cycles</h5>
                     <fieldset>
-                      <input name="Number of Cycles" type="number" id="cycles" placeholder="Number of Cycles" required="">
+                      <input name="Number of Cycles" min=1 max=20 type="number" id="cycles" placeholder="Number of Cycles" required=""/>
                     </fieldset>
                   </div>
                   <div class="col-lg-12">
                     <fieldset>
-                      <button name="enter" type="submit" id="form-submit" class="button">Fabricate</button>
+                      <button name="enter" type="submit" id="form-submit" class="button">FABRICATE</button>
                     </fieldset>
                   </div>
                 </div>
@@ -183,9 +183,13 @@
           }
           
           // send post request
-          fetch('http://localhost:8080/experiment',options)
-              .then(res => console.log(res))
-              .catch(err => console.error(err));
+       //   if(dipspeed<15 && retractspeed < 15 && distance<25 && cycles < 20){
+            console.log("sending");
+            fetch('http://localhost:8080/experiment',options)
+            .then(res => console.log(res))
+            .catch(err => console.error(err));
+          //}
+          
 
 
            // const xhr3 = new XMLHttpRequest();
