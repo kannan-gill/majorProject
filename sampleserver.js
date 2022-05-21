@@ -17,7 +17,7 @@ app.use(cors())
 
 app.use(express.json())
 
-const Pool = require('pg').Pool
+const Pool = require('pg')
 const pool = new Pool({
     // user:'postgres',
     // host:'localhost',
