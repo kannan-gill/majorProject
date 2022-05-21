@@ -185,7 +185,7 @@
           // send post request
        //   if(dipspeed<15 && retractspeed < 15 && distance<25 && cycles < 20){
             console.log("sending");
-            fetch('http://localhost:8080/experiment',options)
+            fetch('/experiment',options)
             .then(res => console.log(res))
             .catch(err => console.error(err));
           //}
