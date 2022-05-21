@@ -30,8 +30,8 @@ const pool = new Pool({
 
 // var arduinoAccepting=true;
 
-app.get('/',(req,res)=>{
-    pool.query('SELECT * FROM dataLogs2')
+app.get('/experimentalData',(req,res)=>{
+    pool.query('SELECT * FROM dataLogs2;')
   .then((data) => {
     // console.log(data.rows);
     res.json(data.rows); 
