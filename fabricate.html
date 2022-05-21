@@ -186,7 +186,7 @@
        //   if(dipspeed<15 && retractspeed < 15 && distance<25 && cycles < 20){
             console.log("sending");
             fetch('/experiment',options)
-            .then(res => console.log(res))
+            .then(res => History.back())
             .catch(err => console.error(err));
           //}
           
