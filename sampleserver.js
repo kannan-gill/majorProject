@@ -1,11 +1,6 @@
 const express = require('express');
 const pgp = require('pg-promise')(/* options */)
 
-
-
-
-
-
 var cors = require('cors')
 
 const axios = require('axios')
@@ -19,7 +14,7 @@ app.use(express.json())
 
 app.use(express.static('.'))
 
-const {Pool} = require('pg')
+const Pool = require('pg').Pool
 const pool = new Pool({
     // user:'postgres',
     // host:'localhost',
@@ -36,7 +31,7 @@ const pool = new Pool({
 // var arduinoAccepting=true;
 
 app.get('/',(req,res)=>{
-    pool.query('SELECT * FROM dataLogs2;')
+    pool.query('SELECT * FROM dataLogs2')
   .then((data) => {
     // console.log(data.rows);
     res.json(data.rows); 
@@ -100,8 +95,6 @@ app.post('/experiment',(req,res)=>{
     var delay= req.body.delay;
     var cycles= req.body.cycles;
     var distance= req.body.distance;
-
-    var dataValid = true;
     if(dipspeed<15 && retractspeed<15 && distance<25 && cycles<20){
         const arduinoIP = "10.0.0.0";
 
@@ -122,6 +115,6 @@ app.post('/experiment',(req,res)=>{
     res.send("Experiment data received, regards Server"); 
 })
 
-app.listen(process.env.PORT || 3000,()=>{
+app.listen(process.env.PORT || port,()=>{
     console.log('listening');
 })

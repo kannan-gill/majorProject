@@ -8,6 +8,7 @@
         
       const xhr = new XMLHttpRequest();
       xhr.onload = function(data){
+        console.log(data);
         console.log(JSON.parse(data.currentTarget.response)[0]["serialnumber"]);
         console.log(data.currentTarget.response);
         var responseData = JSON.parse(data.currentTarget.response);
