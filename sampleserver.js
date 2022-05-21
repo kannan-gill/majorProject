@@ -86,6 +86,7 @@ app.post('/thickness',(req,res)=>{
     .catch((error)=>{
         console.log(error);
     })
+    res.send("updated");
 })
 
 
