@@ -68,7 +68,7 @@ app.post('/arduinoData',(req,res)=>{
     console.log(humidity,temperature,dipSpeed,retractSpeed,delay,cycles,distance,vibration);
 
 
-    pool.query("INSERT INTO dataLogs2 (datetime, dipspeed, retractspeed,numberofcycles,delaytime,distance, humidity, temperature, vibration) VALUES  (now(),"+dipSpeed+","+retractSpeed+","+cycles+","+delay+","+distance+","+humidity+","+temperature+",'"+vibration+"')")
+    pool.query("INSERT INTO dataLogs2 (datetime, dipspeed, retractspeed,numberofcycles,delaytime,distance, humidity, temperature, vibration) VALUES  (now(),"+dipSpeed+","+retractSpeed+","+cycles+","+delay+","+distance+","+humidity+","+temperature+",'"+vibration+"');")
     .then((data)=>{
         console.log("new experiment added");
     })
@@ -84,7 +84,7 @@ app.post('/thickness',(req,res)=>{
     var v2 = req.body.thickness;
     console.log(v1,v2);
 
-    pool.query("UPDATE dataLogs2 SET thickness = "+v2+" WHERE serialnumber = "+v1)
+    pool.query("UPDATE dataLogs2 SET thickness = "+v2+" WHERE serialnumber = "+v1+";")
     .then((data)=>{
         console.log("updated");
     })
@@ -105,7 +105,7 @@ app.post('/experiment',(req,res)=>{
     if(dipspeed<15 && retractspeed<15 && distance<25 && cycles<20){
         const arduinoIP = "10.0.0.0";
 
-        pool.query("INSERT INTO dataLogs2 (datetime, dipspeed, retractspeed,numberofcycles,delaytime,distance) VALUES  (now(),"+dipspeed+","+retractspeed+","+cycles+","+delay+","+distance+")")
+        pool.query("INSERT INTO dataLogs2 (datetime, dipspeed, retractspeed,numberofcycles,delaytime,distance) VALUES  (now(),"+dipspeed+","+retractspeed+","+cycles+","+delay+","+distance+");")
         .then((data)=>{
             console.log("new experiment added");
         })
