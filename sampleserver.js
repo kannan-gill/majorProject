@@ -120,6 +120,6 @@ app.post('/experiment',(req,res)=>{
     res.send("Experiment data received, regards Server"); 
 })
 
-app.listen(port,()=>{
+app.listen(port || process.env.PORT,()=>{
     console.log('listening');
 })
