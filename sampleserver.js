@@ -19,10 +19,15 @@ app.use(express.json())
 
 const Pool = require('pg').Pool
 const pool = new Pool({
-    user:'postgres',
-    host:'localhost',
-    database:'postgres',
-    password:'postgres',
+    // user:'postgres',
+    // host:'localhost',
+    // database:'postgres',
+    // password:'postgres',
+    // port:'5432'
+    host:'ec2-54-165-90-230.compute-1.amazonaws.com',
+    user:'vslxyyftaicmdf',
+    database:'d719mg80gc8u09',
+    password:'4f9d2b196b43c8d5dca5116f7ffcfddae6c18cac7fd26a0b6f9465fd078a7673',
     port:'5432'
 })
 
@@ -98,13 +103,18 @@ app.post('/experiment',(req,res)=>{
     if(dipspeed<15 && retractspeed<15 && distance<25 && cycles<20){
         const arduinoIP = "10.0.0.0";
 
-        axios.get("http://"+ arduinoIP+"/?sign=5001&dipSpeed="+dipspeed+"&retractSpeed="+retractspeed+"&delay="+delay+"&cycles="+cycles+"&distance="+distance)
-       .then(resp => {
-            console.log(resp.data);
+        pool.query("INSERT INTO dataLogs2 (datetime, dipspeed, retractspeed,numberofcycles,delaytime,distance) VALUES  (now(),"+dipspeed+","+retractspeed+","+cycles+","+delay+","+distance+")")
+        .then((data)=>{
+            console.log("new experiment added");
         })
-        .catch(error=>{
-            console.log(error);
-        })
+
+    //     axios.get("http://"+ arduinoIP+"/?sign=5001&dipSpeed="+dipspeed+"&retractSpeed="+retractspeed+"&delay="+delay+"&cycles="+cycles+"&distance="+distance)
+    //    .then(resp => {
+    //         console.log(resp.data);
+    //     })
+    //     .catch(error=>{
+    //         console.log(error);
+    //     })
     }
 
     res.send("Experiment data received, regards Server"); 
